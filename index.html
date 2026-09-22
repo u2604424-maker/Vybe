@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff6b35"><title>MUNCH — Groceries delivered</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#fff8f3;color:#202020}
+button{font:inherit;border:0;cursor:pointer}.app{max-width:620px;margin:auto;min-height:100vh;padding-bottom:85px}
+header{padding:20px 18px 10px;position:sticky;top:0;background:#fff8f3;z-index:5}.brand{font-size:30px;font-weight:900;color:#ff5a2a}.sub{font-size:13px;color:#777}
+.location{margin-top:14px;background:white;border:1px solid #eee;border-radius:16px;padding:12px 14px;display:flex;justify-content:space-between}
+main{padding:10px 18px}.hero{background:linear-gradient(135deg,#ff6b35,#ff9f43);color:white;border-radius:24px;padding:22px;margin:8px 0 20px}.hero h1{margin:0 0 6px;font-size:27px}.hero p{margin:0}
+.section{font-size:20px;font-weight:800;margin:20px 0 12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border-radius:20px;padding:13px;box-shadow:0 3px 15px #0000000b}.pic{height:90px;border-radius:16px;background:#fff1e8;display:grid;place-items:center;font-size:48px}
+.name{font-weight:750;margin-top:10px}.meta{font-size:12px;color:#888;margin:4px 0 8px}.row{display:flex;align-items:center;justify-content:space-between}.price{font-weight:850}
+.add{background:#ff6531;color:white;border-radius:12px;padding:8px 12px;font-weight:750}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(620px,100%);background:white;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px;z-index:10}
+.nav{background:none;color:#777;font-size:11px;font-weight:700}.nav b{display:block;font-size:22px;margin-bottom:2px}.nav.active{color:#ff5a2a}
+.screen{display:none}.screen.active{display:block}.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.back{background:white;border:1px solid #eee;border-radius:12px;padding:9px 12px}.title{font-size:25px;font-weight:850}
+.order,.profilebox,.listbox{background:white;border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 3px 15px #0000000b}.orderhead{display:flex;justify-content:space-between;font-weight:800}.status{color:#ff5a2a;font-size:13px;margin:8px 0}.order small{color:#777}.track{margin-top:12px;background:#fff1e8;color:#e94f20;border-radius:12px;padding:10px;text-align:center;font-weight:750}
+.empty{text-align:center;padding:45px 20px;color:#777}.pill{display:inline-block;background:#fff1e8;color:#e94f20;padding:7px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.itemline{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eee}.itemline:last-child{border:0}.profileicon{font-size:50px}
+</style></head><body><div class="app">
+<header><div class="brand">MUNCH</div><div class="sub">Groceries delivered to your door 🛒</div>
+<div class="location">📍 Deliver to <b>Home · Kolkata</b><span>›</span></div></header>
+<main>
+<section id="home" class="screen active"><div class="hero"><h1>Fresh groceries, fast.</h1><p>Everyday essentials without the grocery run.</p></div>
+<div class="section">Deals for you 🔥</div><div id="products" class="grid"></div></section>
+<section id="orders" class="screen"><div class="top"><button class="back" onclick="show('home')">‹</button><div class="title">Your Orders</div></div><div id="orderList"></div></section>
+<section id="list" class="screen"><div class="top"><button class="back" onclick="show('home')">‹</button><div class="title">Smart List</div></div>
+<div class="listbox"><span class="pill">Quick grocery planning</span>
+<div class="itemline"><span>🥛 Milk</span><button onclick="alert('Added to cart!')">Add</button></div>
+<div class="itemline"><span>🍞 Bread</span><button onclick="alert('Added to cart!')">Add</button></div>
+<div class="itemline"><span>🥚 Eggs</span><button onclick="alert('Added to cart!')">Add</button></div>
+<div class="itemline"><span>🍌 Bananas</span><button onclick="alert('Added to cart!')">Add</button></div></div></section>
+<section id="profile" class="screen"><div class="top"><button class="back" onclick="show('home')">‹</button><div class="title">Profile</div></div>
+<div class="profilebox"><div class="profileicon">👤</div><h2>My MUNCH account</h2><p>Manage your delivery details and preferences.</p></div>
+<div class="profilebox"><div class="itemline">📍 Saved address <span>Home</span></div><div class="itemline">💳 Payment methods <span>›</span></div><div class="itemline">🔔 Notifications <span>›</span></div></div></section>
+</main>
+<nav class="bottom"><button class="nav active" data-page="home"><b>⌂</b>Home</button><button class="nav" data-page="orders"><b>📦</b>Orders</button><button class="nav" data-page="list"><b>✓</b>Smart List</button><button class="nav" data-page="profile"><b>●</b>Profile</button></nav>
+</div>
+<script>
+const products=[["🍌","Bananas","₹55","4.8"],["🍅","Tomatoes","₹48","4.7"],["🥛","Milk","₹62","4.9"],["🥚","Eggs","₹84","4.8"],["🍚","Basmati Rice","₹420","4.7"],["🌾","Atta","₹285","4.8"],["🍞","Bread","₹45","4.6"],["🧃","Orange Juice","₹120","4.7"],["🧴","Dishwash Liquid","₹99","4.6"],["🍎","Apples","₹160","4.8"]];
+function renderProducts(){document.getElementById("products").innerHTML=products.map((p,i)=>'<div class="card"><div class="pic">'+p[0]+'</div><div class="name">'+p[1]+'</div><div class="meta">★ '+p[3]+' · 20–30 min</div><div class="row"><span class="price">'+p[2]+'</span><button class="add" onclick="add('+i+')">Add</button></div></div>').join("")}
+function add(i){let c=JSON.parse(localStorage.getItem("munchCart")||"[]");c.push(products[i]);localStorage.setItem("munchCart",JSON.stringify(c));alert(products[i][1]+" added to cart 🛒")}
+function show(page){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(page).classList.add("active");document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.page===page));if(page==="orders")renderOrders();window.scrollTo(0,0)}
+document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>show(b.dataset.page)));
+function renderOrders(){let o=JSON.parse(localStorage.getItem("munchOrders")||"[]"),e=document.getElementById("orderList");if(!o.length){e.innerHTML='<div class="empty">📦<h3>No orders yet</h3><p>Your placed orders will appear here.</p></div>';return}e.innerHTML=o.slice().reverse().map(x=>'<div class="order"><div class="orderhead"><span>Order #'+x.id+'</span><span>₹'+x.total+'</span></div><div class="status">● '+(x.status||"Order confirmed")+'</div><small>'+(x.items||"Groceries")+' · '+(x.date||"")+'</small><div class="track" onclick="alert('Order #'+x.id+': On the way 🚚')">Track order</div></div>').join("")}
+renderProducts();renderOrders();
+</script></body></html>
